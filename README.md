@@ -102,7 +102,7 @@ The Fretron project is a Kotlin-based application for managing user authenticati
 
 ### Update User
 
-- **URL**: `/api/updateUser`
+- **URL**: `/api/updateUser/{email}`
 - **Method**: `PUT`
 - **Headers**:
   - `Authorization`: `Bearer <JWT_TOKEN>`
@@ -116,16 +116,11 @@ The Fretron project is a Kotlin-based application for managing user authenticati
 
 ### Delete User
 
-- **URL**: `/api/deleteUser`
+- **URL**: `/api/deleteUser/{email}`
 - **Method**: `DELETE`
 - **Headers**:
   - `Authorization`: `Bearer <JWT_TOKEN>`
-- **Body**:
-  ```json
-  {
-    "email": "user@example.com"
-  }
-  ```
+
 
 ### Get All Users
 
