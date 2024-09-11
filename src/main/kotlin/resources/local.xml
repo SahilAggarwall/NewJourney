@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE properties SYSTEM 'http://java.sun.com/dtd/properties.dtd'>
+<properties>
+    <entry key="mongodbConnectionString">mongodb://localhost:27017</entry>
+    <entry key="httpPort">8080</entry>
+    <entry key="databaseName">fretron</entry>
+</properties>

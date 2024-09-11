@@ -1,0 +1,11 @@
+{
+  "type": "record",
+  "name": "User",
+  "namespace": "com.fretron.avro",
+  "fields": [
+    {"name": "name", "type": ["null", "string"], "default": null},
+    {"name": "email", "type": ["null","string"]},
+    {"name": "password", "type": ["null", "string"], "default": null},
+    {"name": "role", "type": ["null", "string"], "default": null}
+  ]
+}
