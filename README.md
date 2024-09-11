@@ -60,7 +60,7 @@ The Fretron project is a Kotlin-based application for managing user authenticati
 
 ### Signup
 
-- **URL**: `/signup`
+- **URL**: `/api/signup`
 - **Method**: `POST`
 - **Body**:
   ```json
@@ -74,7 +74,7 @@ The Fretron project is a Kotlin-based application for managing user authenticati
 
 ### Login
 
-- **URL**: `/login`
+- **URL**: `/api/login`
 - **Method**: `POST`
 - **Body**:
   ```json
@@ -86,7 +86,7 @@ The Fretron project is a Kotlin-based application for managing user authenticati
 
 ### Create User
 
-- **URL**: `/createUser`
+- **URL**: `/api/createUser`
 - **Method**: `POST`
 - **Headers**:
   - `Authorization`: `Bearer <JWT_TOKEN>`
@@ -102,7 +102,7 @@ The Fretron project is a Kotlin-based application for managing user authenticati
 
 ### Update User
 
-- **URL**: `/updateUser`
+- **URL**: `/api/updateUser`
 - **Method**: `PUT`
 - **Headers**:
   - `Authorization`: `Bearer <JWT_TOKEN>`
@@ -116,7 +116,7 @@ The Fretron project is a Kotlin-based application for managing user authenticati
 
 ### Delete User
 
-- **URL**: `/deleteUser`
+- **URL**: `/api/deleteUser`
 - **Method**: `DELETE`
 - **Headers**:
   - `Authorization`: `Bearer <JWT_TOKEN>`
@@ -129,7 +129,7 @@ The Fretron project is a Kotlin-based application for managing user authenticati
 
 ### Get All Users
 
-- **URL**: `/getAllUsers`
+- **URL**: `/api/getAllUsers`
 - **Method**: `GET`
 - **Headers**:
   - `Authorization`: `Bearer <JWT_TOKEN>`
