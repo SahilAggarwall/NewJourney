@@ -34,7 +34,7 @@ class UserResources @Inject constructor(
     }
 
     @POST
-    @Path("/add")
+    @Path("/create")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     fun createUser(@HeaderParam("Authorization") token: String?, user: User): String {
@@ -42,14 +42,14 @@ class UserResources @Inject constructor(
     }
 
     @GET
-    @Path("/users")
+    @Path("/getAllUsers")
     @Produces(MediaType.APPLICATION_JSON)
     fun getAllUsers(@HeaderParam("Authorization") token: String?): String {
         return userService.getAllUsers(token)
     }
 
     @PUT
-    @Path("/update/{email}")
+    @Path("/updateUser/{email}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     fun updateUser(
@@ -59,7 +59,7 @@ class UserResources @Inject constructor(
     }
 
     @DELETE
-    @Path("/delete/{email}")
+    @Path("/deleteUser/{email}")
     @Produces(MediaType.APPLICATION_JSON)
     fun deleteUser(@HeaderParam("Authorization") token: String?, @PathParam("email") email: String): String {
         return userService.deleteUser(token, email)

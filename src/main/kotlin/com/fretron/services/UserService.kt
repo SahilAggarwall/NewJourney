@@ -1,6 +1,8 @@
 package com.fretron.services
 
+import com.fretron.services.SignupProducer
 import com.fretron.avro.*
+import com.fretron.di.KafkaModule
 import com.fretron.repositories.UserRepository
 import com.fretron.utils.JWTUtil
 import javax.inject.Inject
@@ -8,18 +10,19 @@ import javax.inject.Singleton
 
 @Singleton
 class UserService @Inject constructor(
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val signupProducer: SignupProducer
 ) {
 
     fun signup(user: User): String {
         if (user.role == "ADMIN") {
             return ("You can't signup as ADMIN")
         }
-
         if (userRepository.getUserByEmail(user.email.toString()) != null) {
             return ("User with email ${user.email} already exists!")
         }
         userRepository.saveUser(user)
+        signupProducer.sendWelcomeEmailMessage(user.email.toString())
         return ("User Created + ${user.email} successfully")
     }
 

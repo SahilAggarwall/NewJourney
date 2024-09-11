@@ -7,6 +7,7 @@ import com.fretron.di.DaggerAppComponent
 fun main() {
     Context.init(arrayOf("src/main/kotlin/resources/Local.xml"))
     val appComponent: AppComponent = DaggerAppComponent.create()
-    val httpServer = appComponent.httpServer()
+    appComponent.httpServer()
+    appComponent.startEmailConsumer()
     println("Server Started on http://localhost:8080/")
 }

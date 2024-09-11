@@ -15,6 +15,8 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib"))
+    implementation("org.apache.kafka:kafka-clients:3.3.1")
+    implementation("org.apache.kafka:kafka-streams:3.3.1")
     implementation("org.glassfish.jersey.containers:jersey-container-grizzly2-http:2.37")
     implementation("org.glassfish.jersey.inject:jersey-hk2:2.37")
     implementation("org.glassfish.jersey.media:jersey-media-json-jackson:2.37")
