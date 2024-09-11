@@ -1,8 +1,4 @@
-Sure! Here's a general README template for your Kotlin project, excluding the Employee part. You can customize it further based on the specifics of your project.
-
----
-
-# Fretron Project
+# Operation Restful
 
 ## Overview
 
