@@ -8,6 +8,6 @@ fun main() {
     Context.init(arrayOf("src/main/kotlin/resources/Local.xml"))
     val appComponent: AppComponent = DaggerAppComponent.create()
     appComponent.httpServer()
-    appComponent.startEmailConsumer()
+    appComponent.emailConsumer().startConsuming()
     println("Server Started on http://localhost:8080/")
 }

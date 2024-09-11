@@ -10,11 +10,6 @@ import javax.inject.Singleton
 @Component(modules = [HttpModule::class, DatabaseModule::class, ConfigModule::class, KafkaModule::class])
 interface AppComponent {
     fun httpServer(): HttpServer
+    fun signupProducer(): SignupProducer
     fun emailConsumer(): EmailConsumer
-    fun startEmailConsumer() {
-        val emailConsumer = emailConsumer()
-        Thread {
-            emailConsumer.listenForEmails()
-        }.start()
-    }
 }

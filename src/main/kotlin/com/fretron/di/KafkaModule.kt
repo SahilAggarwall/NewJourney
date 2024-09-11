@@ -23,9 +23,14 @@ class KafkaModule {
             put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092")
             put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer::class.java.name)
             put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer::class.java.name)
-            // Add other producer configurations if needed
         }
         return KafkaProducer(props)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSignupProducer(kafkaProducer: KafkaProducer<String, String>): SignupProducer {
+        return SignupProducer(kafkaProducer)
     }
 
     @Provides
@@ -36,20 +41,15 @@ class KafkaModule {
             put(ConsumerConfig.GROUP_ID_CONFIG, "email-consumer-group")
             put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer::class.java.name)
             put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer::class.java.name)
-            // Add other consumer configurations if needed
         }
-        return KafkaConsumer(props)
+        val consumer = KafkaConsumer<String, String>(props)
+        consumer.subscribe(listOf("welcome-topic"))
+        return consumer
     }
 
     @Provides
     @Singleton
     fun provideEmailConsumer(kafkaConsumer: KafkaConsumer<String, String>): EmailConsumer {
         return EmailConsumer(kafkaConsumer)
-    }
-
-    @Provides
-    @Singleton
-    fun provideSignupProducer(kafkaProducer: KafkaProducer<String, String>): SignupProducer {
-        return SignupProducer(kafkaProducer)
     }
 }
