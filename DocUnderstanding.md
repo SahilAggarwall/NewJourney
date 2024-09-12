@@ -1,7 +1,3 @@
-Below is the updated document with all topics, including AVRO and Kafka:
-
----
-
 # **Kotlin Project: Overview and Topics**
 
 ## **Project Overview**
