@@ -45,11 +45,12 @@ The Kotlin project involves building a server-side application with Signup, Logi
 
 ### 7. **Project Structure**
 - **Separation of Concerns**: The project structure is organized into various packages like `services`, `models`, and `resources` to keep the codebase modular and maintainable.
-  - **Services**: Classes like `SignupHandler` and `LoginHandler`.
-  - **Models**: Data classes like `SignupRequest`, `LoginRequest`.
+  - **Services**: For Handling Business Logic
   - **Resources**: API handling is done in resource classes like `UserResources`.
+  - **DI**: Contains Module for Dagger Component
+  - **Avro**: Contains classes
 
-### 8. **Enum for User Roles**
+### 8. **Enum for User Roles** (NOW HAS BEEN REMOVED TO MAKE IT SIMPLE)
 - **Role Enum**: Defined to restrict the role values to either `ADMIN` or `NON_ADMIN`.
 
 ### 9. **Partial Update Functionality**
