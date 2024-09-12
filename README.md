@@ -132,10 +132,3 @@ Configuration settings are handled using environment variables or configuration 
 - `MONGO_URI`: MongoDB connection URI.
 - `JWT_SECRET`: Secret key for JWT.
 
-## Testing
-
-To run tests:
-
-```bash
-./gradlew test
-```
