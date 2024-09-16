@@ -17,11 +17,11 @@
 
 ### 2. **Types of Shipment Tracking:**
 I have also learned about various tracking methods that can be integrated with the TMS for real-time tracking of shipments:
-   - **SIM Tracking:** Uses cellular network information to locate vehicles or shipments via SIM cards.
-   - **VTS (Vehicle Tracking System):** GPS-based system for tracking vehicle movements.
-   - **TrackNet:** Multi-source tracking combining GPS, Wi-Fi, or cellular networks.
-   - **FASTag:** Electronic toll collection system that also offers movement data at toll plazas.
-   - **PTL (Parcel Tracking Label):** Barcode-based tracking to monitor the movement of parcels across the logistics chain.
+   - ***SIM Tracking:*** Uses cellular network information to locate vehicles or shipments via SIM cards.
+   - ***VTS (Vehicle Tracking System):*** GPS-based system for tracking vehicle movements.
+   - ***TrackNet:*** Multi-source tracking combining GPS, Wi-Fi, or cellular networks.
+   - ***FASTag:*** Electronic toll collection system that also offers movement data at toll plazas.
+   - ***PTL (Parcel Tracking Label):*** Barcode-based tracking to monitor the movement of parcels across the logistics chain.
 
 ---
 
