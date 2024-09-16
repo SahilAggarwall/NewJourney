@@ -25,7 +25,7 @@ I have also learned about various tracking methods that can be integrated with t
 
 ---
 
-### 3. **Activity Log Retrieval:**
+### 3. **Activity Log Retrieval:** ( `/shipment/{shipmentId}/update-trail
    - I have learned how the activity logs related to shipments are retrieved. This helps in auditing and tracing each action taken on a shipment, such as status changes
 
 ---
