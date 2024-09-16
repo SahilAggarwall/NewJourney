@@ -21,7 +21,7 @@ I have also learned about various tracking methods that can be integrated with t
    - ***VTS (Vehicle Tracking System):*** GPS-based system for tracking vehicle movements.
    - ***TrackNet:*** Multi-source tracking combining GPS, Wi-Fi, or cellular networks.
    - ***FASTag:*** Electronic toll collection system that also offers movement data at toll plazas.
-   - ***PTL (Parcel Tracking Label):*** Barcode-based tracking to monitor the movement of parcels across the logistics chain.
+   - ***PTL (Partial Truck Load):*** Barcode-based tracking to monitor the movement of parcels across the logistics chain.
 
 ---
 
