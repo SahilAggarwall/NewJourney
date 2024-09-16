@@ -40,7 +40,7 @@ I have also learned about various tracking methods that can be integrated with t
 
 ---
 
-### 6. **Status Changes in Shipments:**
+### 6. **Status Changes in Shipments:**  ( `bulk/sync` is called )
    - The shipment moves through various stages, and each status change reflects the current state of the shipment, triggering corresponding actions in the system. These include sending notifications, updating activity logs, and modifying itineraries. The primary status and secondary status change accordingly.
      - **AT**: Once the Shipment is reached at a Stage, status remains "AT" throught the process, while `secondaryStatus` can differ like `WaitingForLoading`,`WaitingforUnloading`,`WaitingForGateIn`,etc 
      - **NEXT**: Status of the upcoming stage is "NEXT"
