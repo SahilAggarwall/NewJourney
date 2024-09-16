@@ -26,7 +26,7 @@ I have also learned about various tracking methods that can be integrated with t
 ---
 
 ### 3. **Activity Log Retrieval:**
-   - I have learned how the activity logs related to shipments are retrieved. This helps in auditing and tracing each action taken on a shipment, such as status changes, updates to the itinerary, or API requests made to the backend.
+   - I have learned how the activity logs related to shipments are retrieved. This helps in auditing and tracing each action taken on a shipment, such as status changes
 
 ---
 
