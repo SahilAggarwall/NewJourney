@@ -2,6 +2,7 @@
 # Notification Command Handling Flowchart
 
 ```mermaid
+    flowchart
     A[Start: handleNotificationCommand] --> B{Is command null?}
     B -- Yes --> C[Log warning: Null notification command received] --> Z[End]
     
