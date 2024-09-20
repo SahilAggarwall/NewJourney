@@ -3,7 +3,6 @@
 
 ```mermaid
     flowchart
-    graph TD
     A[Start: handleNotificationCommand] --> B{Is command null?}
     B -- Yes --> C[Log warning: Null notification command received] --> Z[End]
     
