@@ -3,6 +3,7 @@
 
 ```mermaid
     flowchart
+    graph TD
     A[Start: handleNotificationCommand] --> B{Is command null?}
     B -- Yes --> C[Log warning: Null notification command received] --> Z[End]
     
@@ -94,10 +95,53 @@
     %% Handle New Command Section
     L --> N[Check debounce time in handleNewCommand]
     N --> O{Debounce time > 0?}
+    
+    %% Handle New Command With Debounce
     O -- Yes --> P[Call handleNewCommandWithDebounce]
+    P --> P1[Log command details and quotas]
+    P1 --> P2{All quotas over?}
+    P2 -- Yes --> P3[Set status to SKIPPED and save command]
+    P2 -- No --> P4[Set status to QUEUED and save command]
+    
+    P3 --> P5[Map command to events]
+    P4 --> P5[Map command to events]
+    P5 --> P6[Produce events for the command] --> Z[End]
+    
+    %% Handle New Command Without Debounce
     O -- No --> Q[Call handleNewCommandWithoutDebounce]
-    P --> Z[End]
-    Q --> Z[End]
+    Q --> Q1[Validate quota limits and remove throttled channels]
+    Q1 --> Q2[Map command to events]
+    Q2 --> Q3[Produce events for the command]
+    
+    Q3 --> Q4{All quotas over?}
+    Q4 -- Yes --> Q5[Set status to SKIPPED and save command] --> Z[End]
+    Q4 -- No --> Q6[Send messages to available channels] --> Z[End]
+    
+    %% Remove Throttled Channels Section
+    Q1 --> T1[Check throttling for Email]
+    T1 --> T2{Is Email throttled?}
+    T2 -- Yes --> T3[Send warning notification for throttled Email] --> T4[Remove Email from command channels]
+    T2 -- No --> T5[Proceed with Email]
+    
+    T4 --> T6[Update command channels]
+    
+    T5 --> T6
+    
+    T6 --> T7[Check throttling for SMS]
+    T7 --> T8{Is SMS throttled?}
+    T8 -- Yes --> T9[Send warning notification for throttled SMS] --> T10[Remove SMS from command channels]
+    T8 -- No --> T11[Proceed with SMS]
+    
+    T10 --> T12[Update command channels]
+    T11 --> T12
+    
+    T12 --> T13[Check throttling for WhatsApp]
+    T13 --> T14{Is WhatsApp throttled?}
+    T14 -- Yes --> T15[Send warning notification for throttled WhatsApp] --> T16[Remove WhatsApp from command channels]
+    T14 -- No --> T17[Proceed with WhatsApp]
+    
+    T16 --> T18[Update command channels]
+    T17 --> T18[Return updated command]
     
     %% Handle Old Command Section
     M --> R[Validate quota limits in handleOldCommand]
