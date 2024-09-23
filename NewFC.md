@@ -113,6 +113,18 @@
     P3 -- Yes --> P15{Is event marked as Read?}
     P15 -- Yes --> P16[Update event in repository]
     P15 -- No --> P17[Increment Email, SMS, WhatsApp Count] --> P16 --> DB
+
+   STC[Scheduled Task Consumer] --> Q[handleScheduledTask] --> Q1[fetchQueuedCommandsAndProduce] --> Q2[Fetch Queued Commands] --> Q3[Initialize Counters: total, applicableCommands, deleted, failed] --> Q4[Get Current Time] --> Q5[Iterate Through Commands] --> Q6[Has Next Command?]
+   DB --> Q2
+   Q6 -- Yes --> Q7[Remove _id Field}
+   Q6 -- No --> Q8[Total > 0?] --> Q9[Log Summary: Total, Expired, Updated, Failed]
+   Q8 --> Q9[END]
+   Q7 --> Q10[Deserialize Command] --> Q11[Is Command Ready?] -- NO --> Q12[Set Debounce Time to Null] --> Q13[Produce Command to Kafka] --> Q14[Delete Command from Queue] --> Q15[Was Deletion Successful?] -- No --> [Log Warning and Increment Failed Counter]
+   Q15 -- Yes --> Q16[Increment Deleted Counter] --> Q5
+   Q11 -- Yes --> Q17[Skip Command Processing] --> Q5
+   Q13 --> CP
+   
+   
    
       
        
