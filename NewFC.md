@@ -1,4 +1,5 @@
-graph TD
+```mermaid
+    flowchart
     %% Start of the process
     A[Start: handleNotificationCommand] --> B{Is command null?}
     B -- Yes --> C[Log warning: Null notification command received] --> Z[End]
@@ -49,3 +50,4 @@ graph TD
     K2 -- Yes --> M{Command status SKIPPED?}
     M -- Yes --> N[Reproduce command]
     M -- No --> O[Send messages to available channels] --> Z[End]
+```
