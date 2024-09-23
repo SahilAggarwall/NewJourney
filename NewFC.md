@@ -119,7 +119,7 @@
    Q6 -- Yes --> Q7[Remove _id Field]
    Q6 -- No --> Q8[Total > 0?] --> Q9[Log Summary: Total, Expired, Updated, Failed]
    Q8 --> Q9[END]
-   Q7 --> Q10[Deserialize Command] --> Q11[Is Command Ready?] -- NO --> Q12[Set Debounce Time to Null] --> Q13[Produce Command to Kafka] --> Q14[Delete Command from Queue] --> Q15[Was Deletion Successful?] -- No --> [Log Warning and Increment Failed Counter]
+   Q7 --> Q10[Deserialize Command] --> Q11[Is Command Ready?] -- NO --> Q12[Set Debounce Time to Null] --> Q13[Produce Command to Kafka] --> Q14[Delete Command from Queue] --> Q15[Was Deletion Successful?] -- No --> Q18[Log Warning and Increment Failed Counter]
    Q15 -- Yes --> Q16[Increment Deleted Counter] --> Q5
    Q11 -- Yes --> Q17[Skip Command Processing] --> Q5
    Q13 --> CP
