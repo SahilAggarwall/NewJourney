@@ -1,5 +1,5 @@
 ```mermaid
-    flowchart
+   flowchart
     A[Start: Commands Consumer] --> B[handleNotificationCommand]
     B --> C{command Null?}
     C -- Yes --> D[validateAndEnrichCommands]
@@ -73,6 +73,37 @@
     J33 --> J35[Add to Verified List]
     J34 --> J35
     J27 -- Yes --> J35
+    J35 --> K
+    L --> D
+    I --> I1[Validate quota limits in handleOldCommand]
+    I1 --> I2[Remove throttled channels]
+    I2 --> I3[Process events from debounced command]
+    I3 --> I4{Any subscribers left?}
+    I4 -- Yes --> I5{Command status is SKIPPED?}
+    I4 -- No --> I6[Log: All subscribers read push notification]
+    I5 -- Yes --> M[Reproduce Command]
+    I5 -- No --> SM[Send messages to available channels]
+    M --> M1[Set status to QUEUED]
+    M1 --> M2[setQuotaOver == false for SMS, Email and WhatsApp]
+    M2 --> M3[produceNotificationCommand]
+    M3 --> CP[Command Producer]
+    H --> H1{getDebounceTime == null ?}
+    H1 -- Yes --> N[handleNewCommandWithoutDebounce]
+    H1 -- No --> O[handleNewCommandWithDebounce]
+    N --> N1[Validate quota limits] --> N2[Remove throttled channels] --> N3[Map command to events] --> N4[Produce events for the command] --> N5[All quotas over?]
+    N5 -- Yes --> N6[Set status to SKIPPED]
+    N5 -- No --> N7[sendMessagesToAvailableChannels]
+    N7 --> SM
+    N6 --> N8[Save Commands to DB]
+    N8 --> DB
+    N4 --> EP[Events Producer]
+    
+    
+    
+    
+    
+    
+    
     
 
     
