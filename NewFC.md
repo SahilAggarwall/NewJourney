@@ -108,7 +108,7 @@
     P5 -- No --> P6[throw Error validating quota]
     P5 -- Yes --> P7[Validate quota limits] --> P8[Is quota validation successful?] -- Yes --> P9[Insert event into repository] --> DB
     P8 -- No --> P6
-    P9 --> P10[Is Push channel in event?] --> P11[Send Push (Event)] --> SM
+    P9 --> P10[Is Push channel in event?] --> P11[Send Push] --> SM
     P11 --> P12[Has commandId and debouncing is false?] -- Yes --> P13[Increment Emai﻿l, SMS, WhatsApp Count] --> P14[Save to DB:Quota] --> DB
     P3 -- Yes --> P15{Is event marked as Read?}
     P15 -- Yes --> P16[Update event in repository]
