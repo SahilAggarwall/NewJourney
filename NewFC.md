@@ -1,6 +1,6 @@
 ```mermaid
    flowchart
-    A[Start: Commands Consumer] --> B[handleNotificationCommand]
+    CC[Commands Consumer] --> B[handleNotificationCommand]
     B --> C{command Null?}
     C -- Yes --> D[validateAndEnrichCommands]
     C -- No --> E[Log warning as Null Command Recieved]
@@ -92,18 +92,30 @@
     H1 -- No --> O[handleNewCommandWithDebounce]
     N --> N1[Validate quota limits] --> N2[Remove throttled channels] --> N3[Map command to events] --> N4[Produce events for the command] --> N5[All quotas over?]
     N5 -- Yes --> N6[Set status to SKIPPED]
-    N5 -- No --> N7[sendMessagesToAvailableChannels]
-    N7 --> SM
-    N6 --> N8[Save Commands to DB]
-    N8 --> DB[DATABASE]
+    N5 -- No --> SM
+    N6 --> N7[Save Commands to DB]
+    N7 --> DB[DATABASE]
     N4 --> EP[Events Producer]
     DB --> F
     O --> O1[Log command details and quotas] --> O2{All quotas over?}
-    O2 -- Yes --> O3[Set status to SKIPPED] --> O5[Save Commands to DB]
+    O2 -- Yes --> O3[Set status to SKIPPED] --> O5[Save Commands to DB] --> DB
     O2 -- No --> O4[Set status to QUEUED] --> O5
     O5 --> O6[mapCommandToEvents] --> O7[Produce events for the command]
     O7 --> EP
-    
+
+    EC[Event Consumer] --> P[handleNotificationEvent] --> P1[handleEvent] --> P2{Is notificationEvent null?} -- No --> P3{Does Event exist in Repo??}
+    P3 -- No --> P4[Validate notification event] --> P5{Is commandId null?}
+    P5 -- No --> P6[throw Error validating quota]
+    P5 -- Yes --> P7[Validate quota limits] --> P8[Is quota validation successful?] -- Yes --> P9[Insert event into repository] --> DB
+    P8 -- No --> P6
+    P9 --> P10[Is Push channel in event?] --> P11[Send Push (Event)] --> SM
+    P11 --> P12[Has commandId and debouncing is false?] -- Yes --> P13[Increment Emai﻿l, SMS, WhatsApp Count] --> P14[Save to DB:Quota] --> DB
+    P3 -- Yes --> P15{Is event marked as Read?}
+    P15 -- Yes --> P16[Update event in repository]
+    P15 -- No --> P17[Increment Email, SMS, WhatsApp Count] --> P16 --> DB
+   
+      
+       
     
     
     
