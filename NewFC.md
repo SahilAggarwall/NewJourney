@@ -95,8 +95,15 @@
     N5 -- No --> N7[sendMessagesToAvailableChannels]
     N7 --> SM
     N6 --> N8[Save Commands to DB]
-    N8 --> DB
+    N8 --> DB[DATABASE]
     N4 --> EP[Events Producer]
+    DB --> F
+    O --> O1[Log command details and quotas] --> O2{All quotas over?}
+    O2 -- Yes --> O3[Set status to SKIPPED] --> O5[Save Commands to DB]
+    O2 -- No --> O4[Set status to QUEUED] --> O5
+    O5 --> O6[mapCommandToEvents] --> O7[Produce events for the command]
+    O7 --> EP
+    
     
     
     
