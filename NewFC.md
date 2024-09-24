@@ -95,7 +95,7 @@
     N5 -- Yes --> N6[Set status to SKIPPED]
     N5 -- No --> SM
     N6 --> N7[Save Commands to DB]
-    N7 --> DB[DATABASE]
+    N7 --> DB{{DATABASE}}
     N4 --> EP[Events Producer]
     DB --> F
     O --> O1[Log command details and quotas] --> O2{All quotas over?}
@@ -107,29 +107,29 @@
 # Event Consumer
 ```mermaid
    flowchart
-    EC[Event Consumer] --> P[handleNotificationEvent] --> P1[handleEvent] --> P2{Is notificationEvent null?} -- No --> P3{Does Event exist in Repo??}
+    EC((Event Consumer)) --> P[handleNotificationEvent] --> P1[handleEvent] --> P2{Is notificationEvent null?} -- No --> P3{Does Event exist in Repo??}
     P3 -- No --> P4[Validate notification event] --> P5{Is commandId null?}
     P5 -- No --> P6[throw Error validating quota]
-    P5 -- Yes --> P7[Validate quota limits] --> P8[Is quota validation successful?] -- Yes --> P9[Insert event into repository] --> DB[DATABASE]
+    P5 -- Yes --> P7[Validate quota limits] --> P8[Is quota validation successful?] -- Yes --> P9[Insert event into repository] --> DB{{DATABASE}}
     P8 -- No --> P6
     P9 --> P10[Is Push channel in event?] --> P11[Send Push] --> SM[Send Message]
     P11 --> P12[Has commandId and debouncing is false?] -- Yes --> P13[Increment Emai﻿l, SMS, WhatsApp Count] --> P14[Save to DB:Quota] --> DB
     P3 -- Yes --> P15{Is event marked as Read?}
     P15 -- Yes --> P16[Update event in repository]
-    P15 -- No --> P17[Increment Email, SMS, WhatsApp Count] --> P16 --> DB[DATABASE]
+    P15 -- No --> P17[Increment Email, SMS, WhatsApp Count] --> P16 --> DB
 ```
 # Schedule Task Consumer
 ```mermaid
    flowchart
-   STC[Scheduled Task Consumer] --> Q[handleScheduledTask] --> Q1[fetchQueuedCommandsAndProduce] --> Q2[Fetch Queued Commands] --> Q3[Initialize Counters: total, applicableCommands, deleted, failed] --> Q4[Get Current Time] --> Q5[Iterate Through Commands] --> Q6[Has Next Command?]
-   DB[DATABASE] --> Q2
+   STC((Scheduled Task Consumer)) --> Q[handleScheduledTask] --> Q1[fetchQueuedCommandsAndProduce] --> Q2[Fetch Queued Commands] --> Q3[Initialize Counters: total, applicableCommands, deleted, failed] --> Q4[Get Current Time] --> Q5[Iterate Through Commands] --> Q6[Has Next Command?]
+   DB{{DATABASE}} --> Q2
    Q6 -- Yes --> Q7[Remove _id Field]
    Q6 -- No --> Q8[Total > 0?] --> Q9[Log Summary: Total, Expired, Updated, Failed]
    Q8 --> Q9[END]
    Q7 --> Q10[Deserialize Command] --> Q11[Is Command Ready?] -- NO --> Q12[Set Debounce Time to Null] --> Q13[Produce Command to Kafka] --> Q14[Delete Command from Queue] --> Q15[Was Deletion Successful?] -- No --> Q18[Log Warning and Increment Failed Counter]
    Q15 -- Yes --> Q16[Increment Deleted Counter] --> Q5
    Q11 -- Yes --> Q17[Skip Command Processing] --> Q5
-   Q13 --> CP[Command Producer]
+   Q13 --> CP[[Command Producer]]
 ```
        
     
