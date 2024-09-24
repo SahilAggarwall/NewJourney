@@ -1,3 +1,4 @@
+# Command Consumer
 ```mermaid
    flowchart
     CC[Commands Consumer] --> B[handleNotificationCommand]
@@ -103,6 +104,7 @@
     O5 --> O6[mapCommandToEvents] --> O7[Produce events for the command]
     O7 --> EP
 ```
+# Event Consumer
 ```mermaid
    flowchart
     EC[Event Consumer] --> P[handleNotificationEvent] --> P1[handleEvent] --> P2{Is notificationEvent null?} -- No --> P3{Does Event exist in Repo??}
@@ -116,6 +118,7 @@
     P15 -- Yes --> P16[Update event in repository]
     P15 -- No --> P17[Increment Email, SMS, WhatsApp Count] --> P16 --> DB[DATABASE]
 ```
+# Schedule Task Consumer
 ```mermaid
    flowchart
    STC[Scheduled Task Consumer] --> Q[handleScheduledTask] --> Q1[fetchQueuedCommandsAndProduce] --> Q2[Fetch Queued Commands] --> Q3[Initialize Counters: total, applicableCommands, deleted, failed] --> Q4[Get Current Time] --> Q5[Iterate Through Commands] --> Q6[Has Next Command?]
