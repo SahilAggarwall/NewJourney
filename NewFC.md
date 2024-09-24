@@ -83,11 +83,11 @@
     I4 -- Yes --> I5{Command status is SKIPPED?}
     I4 -- No --> I6[Log: All subscribers read push notification]
     I5 -- Yes --> M[Reproduce Command]
-    I5 -- No --> SM[Send messages to available channels]
+    I5 -- No --> SM((Send messages))
     M --> M1[Set status to QUEUED]
     M1 --> M2[setQuotaOver == false for SMS, Email and WhatsApp]
     M2 --> M3[produceNotificationCommand]
-    M3 --> CP[Command Producer]
+    M3 --> CP((Command Producer))
     H --> H1{getDebounceTime == null ?}
     H1 -- Yes --> N[handleNewCommandWithoutDebounce]
     H1 -- No --> O[handleNewCommandWithDebounce]
@@ -96,7 +96,7 @@
     N5 -- No --> SM
     N6 --> N7[Save Commands to DB]
     N7 --> DB{{DATABASE}}
-    N4 --> EP[Events Producer]
+    N4 --> EP((Events Producer))
     DB --> F
     O --> O1[Log command details and quotas] --> O2{All quotas over?}
     O2 -- Yes --> O3[Set status to SKIPPED] --> O5[Save Commands to DB] --> DB
@@ -112,7 +112,7 @@
     P5 -- No --> P6[throw Error validating quota]
     P5 -- Yes --> P7[Validate quota limits] --> P8[Is quota validation successful?] -- Yes --> P9[Insert event into repository] --> DB{{DATABASE}}
     P8 -- No --> P6
-    P9 --> P10[Is Push channel in event?] --> P11[Send Push] --> SM[Send Message]
+    P9 --> P10[Is Push channel in event?] --> P11[Send Push] --> SM((Send Message))
     P11 --> P12[Has commandId and debouncing is false?] -- Yes --> P13[Increment Emai﻿l, SMS, WhatsApp Count] --> P14[Save to DB:Quota] --> DB
     P3 -- Yes --> P15{Is event marked as Read?}
     P15 -- Yes --> P16[Update event in repository]
@@ -129,7 +129,7 @@
    Q7 --> Q10[Deserialize Command] --> Q11[Is Command Ready?] -- NO --> Q12[Set Debounce Time to Null] --> Q13[Produce Command to Kafka] --> Q14[Delete Command from Queue] --> Q15[Was Deletion Successful?] -- No --> Q18[Log Warning and Increment Failed Counter]
    Q15 -- Yes --> Q16[Increment Deleted Counter] --> Q5
    Q11 -- Yes --> Q17[Skip Command Processing] --> Q5
-   Q13 --> CP[[Command Producer]]
+   Q13 --> CP((Command Producer))
 ```
        
     
