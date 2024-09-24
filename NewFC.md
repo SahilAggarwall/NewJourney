@@ -102,7 +102,9 @@
     O2 -- No --> O4[Set status to QUEUED] --> O5
     O5 --> O6[mapCommandToEvents] --> O7[Produce events for the command]
     O7 --> EP
-
+```
+```mermaid
+   flowchart
     EC[Event Consumer] --> P[handleNotificationEvent] --> P1[handleEvent] --> P2{Is notificationEvent null?} -- No --> P3{Does Event exist in Repo??}
     P3 -- No --> P4[Validate notification event] --> P5{Is commandId null?}
     P5 -- No --> P6[throw Error validating quota]
@@ -113,7 +115,9 @@
     P3 -- Yes --> P15{Is event marked as Read?}
     P15 -- Yes --> P16[Update event in repository]
     P15 -- No --> P17[Increment Email, SMS, WhatsApp Count] --> P16 --> DB
-
+```
+```mermaid
+   flowchart
    STC[Scheduled Task Consumer] --> Q[handleScheduledTask] --> Q1[fetchQueuedCommandsAndProduce] --> Q2[Fetch Queued Commands] --> Q3[Initialize Counters: total, applicableCommands, deleted, failed] --> Q4[Get Current Time] --> Q5[Iterate Through Commands] --> Q6[Has Next Command?]
    DB --> Q2
    Q6 -- Yes --> Q7[Remove _id Field]
@@ -123,10 +127,7 @@
    Q15 -- Yes --> Q16[Increment Deleted Counter] --> Q5
    Q11 -- Yes --> Q17[Skip Command Processing] --> Q5
    Q13 --> CP
-   
-   
-   
-      
+```
        
     
     
