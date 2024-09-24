@@ -1,7 +1,7 @@
 # Command Consumer
 ```mermaid
    flowchart
-    CC([Commands Consumer]) --> B[handleNotificationCommand]
+    CC(Commands Consumer) --> B[handleNotificationCommand]
     B --> C{command Null?}
     C -- Yes --> D[validateAndEnrichCommands]
     C -- No --> E[Log warning as Null Command Recieved]
