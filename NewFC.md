@@ -31,7 +31,7 @@
     D17 --> J
     J --> J1{Channels Include WhatsApp?}
     J1 -- Yes --> J2[Split WhatsApp and other channels]
-    J2 -- > J3[Generate unique WhatsApp commands per subscriber]
+    J2 --> J3[Generate unique WhatsApp commands per subscriber]
     J3 --> J4{Check user type: Transporter?}
     J4 -- Yes --> J5[Fetch Transporter details, validate mobile numbers]
     J4 -- No --> J6[Fetch User contact details, validate mobile numbers]
